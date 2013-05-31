@@ -16,6 +16,7 @@
 # shared library (eg for JNI).
 
 LOCAL_PATH := $(call my-dir)
+include $(CLEAR_VARS)
 include $(LOCAL_PATH)/Android.common.mk
 
 # to override exit handling in node.cc
@@ -29,3 +30,19 @@ $(call import-module,deps/uv)
 $(call import-module,deps/v8)
 $(call import-module,pty)
 $(call import-module,openssl-android)
+
+
+##########  build an executable ##########
+include $(CLEAR_VARS)
+include $(LOCAL_PATH)/Android.common.mk
+LOCAL_MODULE:= nodex
+LOCAL_MODULE_TAGS  := optional
+LOCAL_STATIC_LIBRARIES := libv8 cares uv http_parser pty
+LOCAL_SHARED_LIBRARIES := libcutils libcrypto libssl
+LOCAL_LDFLAGS += -rdynamic \
+	-lz \
+	-ldl \
+	-llog
+
+include $(BUILD_EXECUTABLE)
+

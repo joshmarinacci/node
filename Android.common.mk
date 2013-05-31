@@ -30,6 +30,12 @@ LOCAL_CPP_EXTENSION := .cc
 
 LOCAL_C_INCLUDES += \
 	$(intermediates)/src \
+	$(LOCAL_PATH)/deps/cares/include \
+	$(LOCAL_PATH)/deps/uv/include \
+	$(LOCAL_PATH)/deps/v8/include \
+	$(LOCAL_PATH)/deps/http_parser \
+	external/zlib \
+	external/openssl/include \
 	$(LOCAL_PATH)/src
 	
 LOCAL_SRC_FILES := \

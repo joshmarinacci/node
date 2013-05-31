@@ -68,7 +68,7 @@ class WriteWrap: public ReqWrap<uv_write_t> {
  protected:
   // People should not be using the non-placement new and delete operator on a
   // WriteWrap. Ensure this never happens.
-  void* operator new (size_t size) { assert(0); };
+  void* operator new (size_t size) { assert(0); return NULL; };
   void operator delete(void* ptr) { assert(0); };
 };
 

@@ -1,11 +1,19 @@
-LOCAL_PATH := $(call my-dir)
+BASE_PATH := $(call my-dir)
+
+
+ifeq ($(TARGET_ARCH),arm)
+    ifneq ($(strip $(ARCH_ARM_HAVE_ARMV7A)),true)
+        $(warning WARNING: Building on ARM with non-ARMv7 variant. On ARM, V8 is well tested only on ARMv7.)
+    endif
+endif
 
 # libv8.so
 # ===================================================
 include $(CLEAR_VARS)
 
-LOCAL_MODULE := libv8
-LOCAL_SRC_FILES := out/android_arm.debug/lib.target/libv8.so
-LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/include
 
-include $(PREBUILT_SHARED_LIBRARY)
+
+#include $(BASE_PATH)/Android.mksnapshot.mk
+include $(BASE_PATH)/Android.libv8.mk
+
+
